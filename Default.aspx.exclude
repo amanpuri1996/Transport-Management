@@ -1,0 +1,217 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <select class="form-control input-circle ng-valid ng-dirty ng-valid-parse ng-touched" 
+        data-ng-options="State.Jurisdiction_Name_Eng for State in Statelst track by State.M_Jurisdiction_Id"
+         data-ng-model="State" ng-disabled="isDisabled">
+        <option value="" disabled="" selected="" style="display: none;" class="">
+            ---Select---</option><option value="3" label="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+        <option value="2" label="Andhra Pradesh">Andhra Pradesh</option><option value="4" label="Arunachal Pradesh">
+            Arunachal Pradesh</option><option value="5" label="Assam">Assam</option><option value="6" label="Bihar">
+                Bihar</option><option value="7" label="Chandigarh">Chandigarh</option><option value="8" label="Chhattisgarh">
+             Chhattisgarh</option><option value="9" label="Dadar and Nagar Haveli">
+                 Dadar and Nagar Haveli</option><option value="10" label="Daman and Diu">
+                     Daman and Diu</option><option value="11" label="Delhi">Delhi</option>
+        '<option value="12" label="Goa">Goa</option><option value="13" label="Gujarat">
+            'Gujarat</option><option value="14" label="Haryana">Haryana</option>
+        <option value="15" label="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="16" label="Jammu and Kashmir">Jammu and Kashmir</option>
+        <option value="17" label="Jharkhand">Jharkhand</option>
+        <option value="18" label="Karnataka">Karnataka</option>
+        <option value="19" label="Kerala">Kerala</option>
+        <option value="20" label="Lakshadweep">Lakshadweep</option><
+            option value="21" label="Madhya Pradesh">Madhya Pradesh<
+        /option><option value="22" label="Maharashtra">Maharashtra</
+            option><optio value="23" label="Manipur">Manipur</optio
+                n><op value="24" label="Meghalaya">Meghalaya</op
+                    
+                    ><opt value="25" label="Mizoram">Mizoram</opt
+                        ion><opti value="26" label="Nagaland">Nagaland</opti
+                            on><optio value="27" label="Odisha">Odisha</optio
+                                n><option value="28" label="Pondicherry">Pondicherry</
+                                    option><o value="29" label="Punjab">Punjab</o
+                                        ption><op value="30" label="Rajasthan">Rajasthan</op
+                                            tion><optio value="31" label="Sikkim">Sikkim</optio
+                                                n><o value="32" label="Tamil Nadu">Tamil Nadu</o
+                                                    ption><op value="33" label="Telangana">Telangana</op
+                                                        tion><opt value="34" label="Tripura">Tripura</opt
+                                                            ion><option value="35" label="UTTAR PRADESH">UTTAR PRADESH</option><option value="36" label="Uttarakhand">Uttarakhand</option><option value="37" label="West Bangal">West Bangal</option></select>
+    </div>
+    </form>
+</body>
+</html>
+
+
+
+
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+                        <asp:HyperLink ID="hyperimglink" runat="server" NavigateUrl="~/AdminDashboard.aspx">
+                        <asp:Image ID="imglogo" runat="server" ImageUrl="logo.png" ></asp:Image>
+                            </asp:HyperLink>
+                        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="AdminDashboard.aspx">Dashboard
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       District
+                                    </a>
+                                    <div class="dropdown-menu" >
+                                        <a class="dropdown-item" href="District.aspx">Add District</a>
+                                    </div>
+                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="Company-Detail.aspx">Company Detail</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Vehicle.aspx">Vehicle</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Consigner.aspx">Condigner</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Bank.aspx">Bank</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="FillingStations.aspx">Filling Station</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Expense.aspx">Expense</a>
+                                    </div>
+                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Loan-Account.aspx">Loan A/C</a>
+                                    </div>
+                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="CashLedger.aspx">Cash Ledger</a>
+                                    </div>
+                                    <div class="dropdown-menu" >
+                                        <a class="dropdown-item" href="District.aspx">District</a>
+                                    </div>
+                                </li>
+                               <%-- <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownproduct" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       FDs
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Add-FD.aspx">Add FDs</a>
+                                    </div>
+                                </li>--%>
+
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownprofile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Vehicle
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="Vehicle.aspx">Add Vehicle</a>
+                                    </div>
+                                </li>
+                               
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsett1" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                     Consigner
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownsett">
+                                        <a class="dropdown-item" href="Consigner.aspx">Add Consigner</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown" hidden="hidden">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsett2" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                     Consignee
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownsett">
+                                        <a class="dropdown-item" href="Consignee.aspx">Add Consigner</a>
+                                    </div>
+                                </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsett212" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Fillling Station
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownsett">
+                                        <a class="dropdown-item" href="FillingStations.aspx">Add Station</a>
+                                    </div>
+                                </li>
+                                 <li class="nav-item dropdown" hidden="hidden">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsett122" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                     Expense
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownsett">
+                                        <a class="dropdown-item" href="Expense.aspx">Add Expense</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown" hidden="hidden">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsett2S" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                       NFO
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownsett">
+                                        <a class="dropdown-item" href="Add-NFO.aspx">Add NFO</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <asp:LinkButton ID="btn_logout" OnClick="btn_logout_Click" CssClass="nav-link d-flex" Text="Logout" runat="server" />
+                                    <%--<a class="nav-link d-flex" href="login.html">
+                                        <i class="far fa-user mr-2 tm-logout-icon"></i>
+                                        <span>Logout</span>
+                                    </a>--%>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav><asp:GridView ID="grd_vw" runat="server" DataKeyNames ="id" AutoGenerateColumns="false" CellPadding="5" CellSpacing="0" Width="100%" CssClass="table table-striped  table-responsive" OnRowEditing="grd_vw_RowEditing">
+                  <Columns>
+                      <asp:TemplateField HeaderText="S.No">
+                          <ItemTemplate>
+                                   <%# ((GridViewRow)Container).RowIndex + 1%>
+                                            <asp:HiddenField ID="hf" runat="server" Value='<%# Eval("id")%>' />
+                          </ItemTemplate>
+                      </asp:TemplateField>
+                       <asp:TemplateField HeaderText="State Name">
+                          <ItemTemplate>
+                              <%#Eval("state") %>
+                          </ItemTemplate>
+                      </asp:TemplateField>
+                       <asp:TemplateField HeaderText="District">
+                          <ItemTemplate>
+                               <%#Eval("district") %>
+                          </ItemTemplate>
+                      </asp:TemplateField>
+                       <asp:TemplateField HeaderText="District Sortname">
+                          <ItemTemplate>
+                               <%#Eval("district_sortname") %>
+                          </ItemTemplate>
+                      </asp:TemplateField>
+                       <asp:TemplateField HeaderText="Date">
+                          <ItemTemplate>
+                               <%#Eval("created_date") %>
+                          </ItemTemplate>
+                      </asp:TemplateField>
+                      <asp:TemplateField HeaderText="Edit" Visible="true">
+                          <ItemTemplate>
+                         <asp:LinkButton CssClass="edit" ID="cmdEdit" runat="server" CommandName="Edit">
+                    <i class="fa fa-edit" data-placement="top" title="Edit/View" data-toggle="tooltip"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                      </asp:TemplateField>
+
+                  </Columns>
+              </asp:GridView>   
+              s

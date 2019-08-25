@@ -1,0 +1,198 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add-EPF.aspx.cs" Inherits="Add_EPF" %>
+
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+<asp:Content ID="head" runat="server" ContentPlaceHolderID="head">
+    <script type="text/javascript">
+        function ShowModal() {
+
+            $('#myModal').modal('show');
+        }
+        function CloseModalPopUp() {
+
+            $('#myModal').modal('hide');
+        }
+        function Confirm_Delete() {
+            var r = confirm("Are you sure to delete this item.");
+            if (r == true) return true;
+            else return false;
+        }
+    </script>
+</asp:Content>
+<asp:Content ID="cnt" runat="server" ContentPlaceHolderID="footer">
+    <div class="row tm-content-row tm-mt-big">
+        <div class="box">
+            <div class="box-header">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <div class="btn-group" data-placement="top" title="Menu" data-toggle="tooltip">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true">
+                                <span class="fa-bars fa fa-1x"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:LinkButton runat="server" OnClientClick="ShowModal()" ID="lnkAddNew">Add New</asp:LinkButton>
+                                </li>
+                                <li>
+                            </ul>
+                        </div>
+                        <span class="box-title">Add New</span>
+                    </ContentTemplate>
+
+                </asp:UpdatePanel>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow: scroll; height: 433px;">
+                <asp:UpdatePanel ID="updmsg" runat="server" EnableViewState="true">
+                    <ContentTemplate>
+                        <asp:Label ID="lblMessage" Width="100%" CssClass="alert alert-success" role="alert"
+                            runat="server" Visible="false">
+                            
+                        </asp:Label>
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="clearfix"></div>
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="grdvw_epf" AutoGenerateColumns="false" DataKeyNames="id"  CssClass="table table-bordered table-striped" runat="server" OnRowEditing="grdvw_epf_RowEditing">
+                           <Columns>
+                                    <asp:TemplateField HeaderText="S.No" ItemStyle-Width="50px">
+                                        <ItemTemplate>
+                                            <%# ((GridViewRow)Container).RowIndex + 1%>
+                                            <asp:HiddenField ID="hf" runat="server" Value='<%# Eval("id")%>' />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="40px" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Employee Name">
+                                        <ItemTemplate>
+                                            <%# Eval("employee_name")%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="EPF Number">
+                                        <ItemTemplate>
+                                            <%# Eval("epf_number")%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                      <asp:TemplateField HeaderText="Current Value">
+                                        <ItemTemplate>
+                                            <%# Eval("current_value")%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="Start Date" >
+                                        <ItemTemplate>
+                                            <%# Eval("start_date")%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <i style="text-align: center; width: 100%" class="fa fa-edit"></i>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:LinkButton CssClass="edit" ID="cmdEdit" runat="server" CommandName="Edit"  OnClientClick="ShowModal()">
+                                            <i class="fa fa-edit" data-placement="top" title="Edit/View" data-toggle="tooltip"></i></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <i style="text-align: center; width: 100%" class="fa fa-trash"></i>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:LinkButton CssClass="delete" ID="cmdDelete" runat="server" CommandName="Delete" CommandArgument='<%#Eval("id") %>'  OnClientClick="return Confirm_Delete()">
+                                            <i class="fa fa-trash" data-placement="top" title="Delete" data-toggle="tooltip"></i>
+                                        </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <!-- /.box-body -->
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                <ProgressTemplate>
+                    <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+        </div>
+        <!-- /.box -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel" style="position: fixed;">Add EPF/PPF
+                                </h4>
+                            </div>
+                            <asp:Panel runat="server" ID="pnlForm" DefaultButton="btnSubmit">
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">Employee Name<span class="text-red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_employee_name" runat="server" CssClass="form-control" placeholder="Employee Name"></asp:TextBox>
+                                                    <asp:HiddenField ID="hfItemId" Value="" runat="server" />
+                                                </div>
+                                                <label for="inputPassword3" class="col-sm-2 control-label">EPF No.<span class="text-red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_epf_no" runat="server" CssClass="form-control" placeholder="EPF No."></asp:TextBox>
+                                                </div>
+
+                                                <label for="inputPassword3" class="col-sm-2 control-label">Current Value<span class="text-red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_current_value" runat="server" CssClass="form-control" placeholder="Current Value"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="validation_current_value" runat="server" ValidationGroup="a"
+                                                        ValidationExpression="\d+" ControlToValidate="txt_current_value" Display="Static" ForeColor="Red"
+                                                        ErrorMessage="Type Digits Only" SetFocusOnError="true"></asp:RegularExpressionValidator>
+                                                </div>
+                                                <label for="inputPassword3" class="col-sm-2 control-label">Start Date<span class="text-red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_start_date" runat="server" Enabled="false" CssClass="form-control" placeholder="Start Date"></asp:TextBox>
+                                                    <img src="calendar.png" id="img_btn" height="40" width="40" />
+                                                    <asp:CalendarExtender runat="server" PopupButtonID="img_btn" Enabled="True" TargetControlID="txt_start_date"
+                                                        ID="txt_start_date_CalendarExtender"></asp:CalendarExtender>
+                                                </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                                <div class="form-group center-block">
+                                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Label runat="server" ID="lblmsg" CssClass="warning" Text="Sorry No Record found."
+                                                                Visible="false"></asp:Label>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                    <asp:UpdateProgress ID="progress" runat="server">
+                                                        <ProgressTemplate>
+                                                            <span class="fa fa-circle-o-notch fa-spin fa-2x"></span>Please Wait...
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" onclientclick="HideModal()" data-dismiss="modal">Close</button>
+                                        <asp:Button ID="btnSubmit" CssClass="btn btn-primary" runat="server" ValidationGroup="a" OnClick="btnSubmit_Click"  Text="Submit"  OnClientClick="return userValid();" />
+                                    </div>
+                                        </div>
+                                    </div>
+                                 
+                                </asp:Panel>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+       </div>
+
+</asp:Content>

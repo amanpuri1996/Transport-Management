@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+public partial class Add_EPF : System.Web.UI.Page
+{
+    DTO objdto = new DTO();
+    DAL objdal = new DAL();
+    BAL objbal = new BAL();
+    SqlCommand cmd;
+    SqlDataAdapter sda;
+    DataTable dt;
+    DataSet ds;
+    static DataTable dsstatic = new DataTable();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            bind_info();
+        }
+    }
+
+    public void bind_info()
+    {
+       dsstatic=objbal.binf_epf_ppf(objdto);
+        grdvw_epf.DataSource=dsstatic;
+        grdvw_epf.DataBind();
+    } 
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        #region submit
+        if (btnSubmit.Text == "Submit")
+        {
+            try
+            {
+                objdto.employee_name = txt_employee_name.Text;
+                objdto.epf_no = txt_epf_no.Text;
+                objdto.nfo_number = txt_epf_no.Text;
+                objdto.start_date = txt_start_date.Text;
+                objdto.current_value = txt_current_value.Text;
+                objdto.created_date = DateTime.Now.ToString();
+                int x = objbal.insert_epf_ppf(objdto);
+                if (x != 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert ('EPF/PPF Add SuccessFully'); window.location='Add-EPF.aspx'", true);
+                }
+            }
+            catch (Exception excp)
+            {
+                throw excp;
+            }
+        }
+        #endregion
+
+        #region Update
+        else if (btnSubmit.Text == "Update")
+        {
+            try
+            {
+                objdto.updtid = hfItemId.Value;
+               objdto.employee_name = txt_employee_name.Text;
+                objdto.epf_no = txt_epf_no.Text;
+                objdto.nfo_number = txt_epf_no.Text;
+                objdto.start_date = txt_start_date.Text;
+                objdto.current_value = txt_current_value.Text;
+                objdto.created_date = DateTime.Now.ToString();
+                int x = objbal.update_epf_ppf(objdto);
+                if (x != 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('EPF/PPF Update Successfully');window.location='Add-EPF.aspx';", true);
+                }
+            }
+            catch (Exception excp)
+            {
+                throw excp;
+            }
+        }
+        #endregion
+    }
+    protected void grdvw_epf_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        try
+        {
+            string sid = grdvw_epf.DataKeys[e.NewEditIndex].Values[0].ToString();
+            var data = dsstatic.AsEnumerable().Where(a => (a["id"]).Equals(int.Parse(sid))).AsDataView().ToTable();
+            foreach(DataRow dr in data.Rows)
+            {
+                hfItemId.Value = sid;
+                txt_employee_name.Text = dr["employee_name"].ToString();
+                txt_epf_no.Text = dr["epf_number"].ToString();
+                txt_start_date.Text = dr["start_date"].ToString();
+                txt_current_value.Text = dr["current_value"].ToString();
+                btnSubmit.Text = "Update";
+            }
+        }
+        catch (Exception excp)
+        {
+            throw excp;
+        }
+    }
+}
